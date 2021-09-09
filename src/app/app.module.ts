@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { InMemoryDataService } from './in-memory-data.service';
 import { RecipeCardComponent } from './recipe/recipe-card/recipe-card.component';
 import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component';
 
@@ -15,11 +16,12 @@ import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component'
     RecipeListComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
-    HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
-    )
+    ),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
