@@ -1,0 +1,21 @@
+<div *ngIf="recipe">
+  <h1 class="recipe-name">{{recipe.name| uppercase}}</h1>
+
+  <div class="flex-container">
+    <div style="width:11em">
+      <h2>Ingredients</h2>
+      <li *ngFor="let ingredient of recipe.ingredients">
+        <p class="ingredient">{{ingredient.quantity}} of {{ingredient.name}}</p>
+      </li>
+    </div>
+
+    <div>
+      <h2>Method</h2>
+      <ol
+        style="padding-left:0.25em"
+        *ngFor="let instruction of recipe.instructions; index as i">
+        <p class="instruction">{{i + 1}}. {{instruction}}</p>
+      </ol>
+    </div>
+  </div>
+</div>
