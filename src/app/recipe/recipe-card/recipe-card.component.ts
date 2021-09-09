@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Recipe, Ingredient } from './recipe';
-import { RecipeService } from './recipe.service';
+import { Recipe, Ingredient } from '../recipe';
+import { RecipeService } from '../recipe.service';
 
 @Component({
-  selector: 'recipe',
-  templateUrl: './recipe.component.html',
-  styleUrls: ['./recipe.component.css']
+  selector: 'recipe-card',
+  templateUrl: './recipe-card.component.html',
+  styleUrls: ['./recipe-card.component.css']
 })
-export class RecipeComponent implements OnInit {
+export class RecipeCardComponent implements OnInit {
   recipe: Recipe | undefined;
 
   constructor(private recipeService: RecipeService) { }

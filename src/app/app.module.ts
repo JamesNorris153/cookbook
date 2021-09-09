@@ -5,12 +5,14 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 
 import { AppComponent } from './app.component';
-import { RecipeComponent } from './recipe/recipe.component';
+import { RecipeCardComponent } from './recipe/recipe-card/recipe-card.component';
+import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RecipeComponent
+    RecipeCardComponent,
+    RecipeListComponent
   ],
   imports: [
     BrowserModule,
