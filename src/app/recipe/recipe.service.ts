@@ -7,6 +7,9 @@ import { Recipe } from './recipe'
 
 @Injectable({ providedIn: 'root' })
 export class RecipeService {
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
   private recipesUrl = 'api/recipes';
 
   constructor(private http: HttpClient) { }
@@ -14,15 +17,22 @@ export class RecipeService {
   getRecipe(id: number): Observable<Recipe> {
     const recipeUrl = `${this.recipesUrl}/${id}`;
     return this.http.get<Recipe>(recipeUrl).pipe(
-      tap(_ => console.log('getRecipe')),
+      tap(_ => console.log(`getRecipe id=${id}`)),
       catchError(this.handleError<Recipe>('getRecipe'))
     );
   }
 
   getRecipes(): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(this.recipesUrl).pipe(
-      tap(_ => console.log('getRecipes')),
+      tap(_ => console.log('getRecipe')),
       catchError(this.handleError<Recipe[]>('getRecipes', []))
+    );
+  }
+
+  updateRecipe(recipe: Recipe): Observable<any> {
+    return this.http.put(this.recipesUrl, recipe, this.httpOptions).pipe(
+      tap(_ => console.log(`updateRecipe id=${recipe.id}`)),
+      catchError(this.handleError<any>('updateHero'))
     );
   }
 

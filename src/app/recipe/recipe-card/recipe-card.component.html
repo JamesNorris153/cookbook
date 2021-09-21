@@ -1,11 +1,32 @@
-<div *ngIf="recipe">
-  <h1 class="recipe-name">{{recipe.name| uppercase}}</h1>
+<div
+  *ngIf="recipe">
 
-  <div class="flex-container">
-    <div style="width:11em">
+  <div
+    *ngIf="!editMode; else editName">
+    <h1
+      class="recipe-name">
+      {{recipe.name | uppercase}}
+    </h1>
+  </div>
+
+  <ng-template
+    #editName>
+    <input
+      [(ngModel)]="recipe.name"
+      placeholder="Recipe name"/>
+  </ng-template>
+
+  <div
+    class="flex-container">
+    <div
+      style="width:11em">
       <h2>Ingredients</h2>
-      <li *ngFor="let ingredient of recipe.ingredients">
-        <p class="ingredient">{{ingredient.quantity}} of {{ingredient.name}}</p>
+      <li
+        *ngFor="let ingredient of recipe.ingredients">
+        <p
+          class="ingredient">
+          {{ingredient.quantity}} of {{ingredient.name}}
+        </p>
       </li>
     </div>
 
@@ -14,8 +35,27 @@
       <ol
         style="padding-left:0.25em"
         *ngFor="let instruction of recipe.instructions; index as i">
-        <p class="instruction">{{i + 1}}. {{instruction}}</p>
+        <p
+          class="instruction">
+          {{i + 1}}. {{instruction}}
+        </p>
       </ol>
     </div>
   </div>
+
+  <div
+    *ngIf="!editMode; else saveButton">
+    <button
+      (click)="editMode = true">
+      Edit
+    </button>
+  </div>
+
+  <ng-template
+    #saveButton>
+    <button
+      (click)="editMode = false; save()">
+      Save
+    </button>
+  </ng-template>
 </div>
