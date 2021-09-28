@@ -24,7 +24,7 @@ export class RecipeService {
 
   getRecipes(): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(this.recipesUrl).pipe(
-      tap(_ => console.log('getRecipe')),
+      tap(_ => console.log('getRecipes')),
       catchError(this.handleError<Recipe[]>('getRecipes', []))
     );
   }
@@ -32,7 +32,7 @@ export class RecipeService {
   updateRecipe(recipe: Recipe): Observable<any> {
     return this.http.put(this.recipesUrl, recipe, this.httpOptions).pipe(
       tap(_ => console.log(`updateRecipe id=${recipe.id}`)),
-      catchError(this.handleError<any>('updateHero'))
+      catchError(this.handleError<any>('updateRecipe'))
     );
   }
 
