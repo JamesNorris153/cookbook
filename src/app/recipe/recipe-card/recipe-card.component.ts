@@ -11,6 +11,7 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./recipe-card.component.css']
 })
 export class RecipeCardComponent implements OnInit {
+  editMode = false;
   recipe: Recipe | undefined;
 
   constructor(
@@ -20,5 +21,11 @@ export class RecipeCardComponent implements OnInit {
   ngOnInit(): void {
     const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.recipeService.getRecipe(id).subscribe(recipe => this.recipe = recipe);
+  }
+
+  save(): void {
+    if (this.recipe) {
+      this.recipeService.updateRecipe(this.recipe).subscribe();
+    }
   }
 }

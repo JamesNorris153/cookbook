@@ -10,10 +10,10 @@ export class InMemoryDataService implements InMemoryDbService {
         id: 11,
         name: 'Lasagne',
         instructions: [
-          'make pasta',
-          'make sauce',
-          'make meat',
-          'eat'
+          { duration: 10, method: 'make pasta' },
+          { duration: 5, method: 'make sauce' },
+          { duration: 7, method: 'make meat' },
+          { duration: 2, method: 'eat' }
         ],
         ingredients: [
           { name: 'meat', quantity: '350 grams' },
@@ -25,10 +25,10 @@ export class InMemoryDataService implements InMemoryDbService {
         id: 12,
         name: 'Pizza',
         instructions: [
-          'make dough',
-          'flip',
-          'make sauce',
-          'cook'
+          { duration: 10, method: 'make dough' },
+          { duration: 5, method: 'flip' },
+          { duration: 7, method: 'make sauce' },
+          { duration: 2, method: 'cook' }
         ],
         ingredients: [
           { name: 'dough', quantity: '100 grams' },

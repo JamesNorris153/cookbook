@@ -1,21 +1,85 @@
-<div *ngIf="recipe">
-  <h1 class="recipe-name">{{recipe.name| uppercase}}</h1>
+<div
+  *ngIf="recipe">
 
-  <div class="flex-container">
-    <div style="width:11em">
+  <h1
+    *ngIf="!editMode; else editName"
+    class="recipe-name">
+    {{recipe.name | uppercase}}
+  </h1>
+
+  <ng-template
+    #editName>
+    <input
+      [(ngModel)]="recipe.name"
+      placeholder="Recipe name"/>
+  </ng-template>
+
+  <div
+    class="flex-container">
+    <div>
       <h2>Ingredients</h2>
-      <li *ngFor="let ingredient of recipe.ingredients">
-        <p class="ingredient">{{ingredient.quantity}} of {{ingredient.name}}</p>
+      <li
+        *ngFor="let ingredient of recipe.ingredients">
+        <p
+          *ngIf="!editMode; else editIngredient"
+          class="ingredient">
+          {{ingredient.quantity}} of {{ingredient.name}}
+        </p>
+        <ng-template
+          #editIngredient>
+          <div
+            class="flex-container">
+            <input
+              [(ngModel)]="ingredient.quantity"
+              placeholder="Quantity"/>
+              <p>of</p>
+            <input
+              [(ngModel)]="ingredient.name"
+              placeholder="Ingredient"/>
+          </div>
+        </ng-template>
       </li>
     </div>
 
     <div>
       <h2>Method</h2>
       <ol
-        style="padding-left:0.25em"
         *ngFor="let instruction of recipe.instructions; index as i">
-        <p class="instruction">{{i + 1}}. {{instruction}}</p>
+        <p
+          *ngIf="!editMode; else editInstruction"
+          class="instruction">
+          {{i + 1}}. {{instruction.method}} ({{instruction.duration}} minutes)
+        </p>
+        <ng-template
+          #editInstruction>
+          <div
+            class="flex-container">
+            <p>{{i}}</p>
+            <input
+              [(ngModel)]="instruction.duration"
+              placeholder="Duration"/>
+            <input
+              [(ngModel)]="instruction.method"
+              placeholder="Method"/>
+          </div>
+        </ng-template>
       </ol>
     </div>
   </div>
+
+  <div
+    *ngIf="!editMode; else saveButton">
+    <button
+      (click)="editMode = true">
+      Edit
+    </button>
+  </div>
+
+  <ng-template
+    #saveButton>
+    <button
+      (click)="editMode = false; save()">
+      Save
+    </button>
+  </ng-template>
 </div>
