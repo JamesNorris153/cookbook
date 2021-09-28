@@ -16,8 +16,7 @@
 
   <div
     class="flex-container">
-    <div
-      style="width:11em">
+    <div>
       <h2>Ingredients</h2>
       <li
         *ngFor="let ingredient of recipe.ingredients">
@@ -47,7 +46,6 @@
     <div>
       <h2>Method</h2>
       <ol
-        style="padding-left:0.25em"
         *ngFor="let instruction of recipe.instructions; index as i">
         <p
           *ngIf="!editMode; else editInstruction"
