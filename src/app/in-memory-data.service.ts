@@ -4,7 +4,7 @@ import { Recipe } from './recipe/recipe';
 
 @Injectable({ providedIn: 'root' })
 export class InMemoryDataService implements InMemoryDbService {
-  createDb() {
+  public createDb() {
     const recipes = [
       {
         id: 11,
@@ -38,5 +38,9 @@ export class InMemoryDataService implements InMemoryDbService {
       }
     ];
     return {recipes};
+  }
+
+  private genId(recipes: Recipe[]): number {
+    return recipes.length > 0 ? Math.max(...recipes.map(recipe => recipe.id)) + 1 : 11;
   }
 }
