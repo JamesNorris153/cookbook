@@ -11,19 +11,22 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./recipe-card.component.css']
 })
 export class RecipeCardComponent implements OnInit {
-  editMode = false;
-  recipe: Recipe | undefined;
+  public editMode = false;
+  public recipe: Recipe | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private recipeService: RecipeService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.editMode = params.editMode == "true" ? true : false;
+    });
     const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.recipeService.getRecipe(id).subscribe(recipe => this.recipe = recipe);
   }
 
-  save(): void {
+  public save(): void {
     if (this.recipe) {
       this.recipeService.updateRecipe(this.recipe).subscribe();
     }

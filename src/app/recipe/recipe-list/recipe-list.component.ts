@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Recipe } from '../recipe';
 import { RecipeService } from '../recipe.service';
@@ -9,11 +10,22 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
-  recipes: Recipe[] = [];
+  public recipes: Recipe[] = [];
 
-  constructor(private recipeService: RecipeService) { }
+  public constructor(
+    private recipeService: RecipeService,
+    private router: Router) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.recipeService.getRecipes().subscribe(recipes => this.recipes = recipes);
+  }
+
+  public addRecipe(): void {
+    var name = "";
+
+    this.recipeService.addRecipe({ name } as Recipe).subscribe(recipe => {
+      this.recipes.push(recipe);
+      this.router.navigate([`/recipes/${recipe.id}`], {queryParams: {editMode: 'true'}});
+    });
   }
 }

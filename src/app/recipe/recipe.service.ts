@@ -14,6 +14,13 @@ export class RecipeService {
 
   constructor(private http: HttpClient) { }
 
+  addRecipe(recipe: Recipe): Observable<Recipe> {
+    return this.http.post<Recipe>(this.recipesUrl, recipe, this.httpOptions).pipe(
+      tap((newRecipe: Recipe) => console.log(`addRecipe id=${newRecipe.id}`)),
+      catchError(this.handleError<Recipe>('addRecipe'))
+    )
+  }
+
   getRecipe(id: number): Observable<Recipe> {
     const recipeUrl = `${this.recipesUrl}/${id}`;
     return this.http.get<Recipe>(recipeUrl).pipe(

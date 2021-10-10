@@ -9,9 +9,15 @@
 
   <ng-template
     #editName>
-    <input
-      [(ngModel)]="recipe.name"
-      placeholder="Recipe name"/>
+    <div>
+      <input
+        #recipeName
+        [(ngModel)]="recipe.name"
+        placeholder="Recipe name"/>
+      <input
+        type="checkbox"
+        (change)="recipeName.disabled = !recipeName.disabled;"/>
+    </div>
   </ng-template>
 
   <div

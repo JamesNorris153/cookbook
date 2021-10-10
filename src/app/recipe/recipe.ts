@@ -1,8 +1,8 @@
 export interface Recipe {
   id: number;
   name: string;
-  instructions: Instruction[];
   ingredients: Ingredient[];
+  instructions: Instruction[];
 }
 
 export interface Ingredient {

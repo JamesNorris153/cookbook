@@ -2,7 +2,14 @@
   <h2>Recipes</h2>
   <a
     *ngFor="let recipe of recipes"
-    routerLink="/recipes/{{recipe.id}}">
+    routerLink="/recipes/{{recipe.id}}"
+    [queryParams]="{editMode: 'false'}">
     {{recipe.name}}
+  </a>
+  <a>
+    <button
+      (click)="addRecipe()">
+      Add New Recipe
+    </button>
   </a>
 </div>
