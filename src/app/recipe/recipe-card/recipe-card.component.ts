@@ -14,7 +14,7 @@ export class RecipeCardComponent implements OnInit {
   public editMode = false;
   public recipe: Recipe | undefined;
 
-  constructor(
+  public constructor(
     private activatedRoute: ActivatedRoute,
     private recipeService: RecipeService) { }
 

@@ -21,8 +21,7 @@ export class RecipeListComponent implements OnInit {
   }
 
   public addRecipe(): void {
-    var name = "";
-
+    let name = "";
     this.recipeService.addRecipe({ name } as Recipe).subscribe(recipe => {
       this.recipes.push(recipe);
       this.router.navigate([`/recipes/${recipe.id}`], {queryParams: {editMode: 'true'}});
