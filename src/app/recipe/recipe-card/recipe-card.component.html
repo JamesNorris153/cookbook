@@ -1,91 +1,55 @@
 <div
   *ngIf="recipe">
+  <div>
+    <input
+      #recipeName
+      class="title"
+      [(ngModel)]="recipe.name"
+      placeholder="Recipe name"/>
+  </div>
 
-  <h1
-    *ngIf="!editMode; else editName"
-    class="recipe-name">
-    {{recipe.name | uppercase}}
-  </h1>
-
-  <ng-template
-    #editName>
-    <div>
-      <input
-        #recipeName
-        [(ngModel)]="recipe.name"
-        placeholder="Recipe name"/>
-      <input
-        type="checkbox"
-        (change)="recipeName.disabled = !recipeName.disabled;"/>
-    </div>
-  </ng-template>
-
-  <div
-    class="flex-container">
+  <div>
     <div>
       <h2>Ingredients</h2>
       <li
         *ngFor="let ingredient of recipe.ingredients">
-        <p
-          *ngIf="!editMode; else editIngredient"
-          class="ingredient">
-          {{ingredient.quantity}} of {{ingredient.name}}
-        </p>
-        <ng-template
-          #editIngredient>
-          <div
-            class="flex-container">
-            <input
-              [(ngModel)]="ingredient.quantity"
-              placeholder="Quantity"/>
-              <p>of</p>
-            <input
-              [(ngModel)]="ingredient.name"
-              placeholder="Ingredient"/>
-          </div>
-        </ng-template>
+        <br/>
+        <div
+          class="flex-container">
+          <input
+            [(ngModel)]="ingredient.quantity"
+            placeholder="Quantity"/>
+            <p>of</p>
+          <input
+            [(ngModel)]="ingredient.name"
+            placeholder="Ingredient"/>
+        </div>
       </li>
+      <button
+        (click)="addIngredient()">
+        +
+      </button>
     </div>
 
     <div>
       <h2>Method</h2>
       <ol
         *ngFor="let instruction of recipe.instructions; index as i">
-        <p
-          *ngIf="!editMode; else editInstruction"
-          class="instruction">
-          {{i + 1}}. {{instruction.method}} ({{instruction.duration}} minutes)
-        </p>
-        <ng-template
-          #editInstruction>
-          <div
-            class="flex-container">
-            <p>{{i}}</p>
-            <input
-              [(ngModel)]="instruction.duration"
-              placeholder="Duration"/>
-            <input
-              [(ngModel)]="instruction.method"
-              placeholder="Method"/>
-          </div>
-        </ng-template>
+        <div
+          class="flex-container">
+          <p>{{i}}</p>
+          <input
+            [(ngModel)]="instruction.duration"
+            placeholder="Duration"/>
+          <input
+            [(ngModel)]="instruction.method"
+            placeholder="Method"/>
+        </div>
       </ol>
+      <button
+        (click)="addInstruction()">
+        +
+      </button>
     </div>
   </div>
-
-  <div
-    *ngIf="!editMode; else saveButton">
-    <button
-      (click)="editMode = true">
-      Edit
-    </button>
-  </div>
-
-  <ng-template
-    #saveButton>
-    <button
-      (click)="editMode = false; save()">
-      Save
-    </button>
-  </ng-template>
 </div>

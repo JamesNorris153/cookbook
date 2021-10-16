@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Recipe } from '../recipe';
+import { Recipe, Ingredient, Instruction } from '../recipe';
 import { RecipeService } from '../recipe.service';
 
 @Component({
@@ -21,10 +21,17 @@ export class RecipeListComponent implements OnInit {
   }
 
   public addRecipe(): void {
-    let name = "";
-    this.recipeService.addRecipe({ name } as Recipe).subscribe(recipe => {
+    let name = '';
+    let ingredients: Ingredient[] = [];
+    let instructions: Instruction[] = [];
+
+    this.recipeService.addRecipe({
+      name,
+      ingredients,
+      instructions
+    } as Recipe).subscribe(recipe => {
       this.recipes.push(recipe);
-      this.router.navigate([`/recipes/${recipe.id}`], {queryParams: {editMode: 'true'}});
+      this.router.navigate([`/recipes/${recipe.id}`]);
     });
   }
 }

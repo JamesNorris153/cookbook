@@ -1,8 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { Recipe, Ingredient } from '../recipe';
+import { Recipe, Ingredient, Instruction } from '../recipe';
 import { RecipeService } from '../recipe.service';
 
 @Component({
@@ -10,8 +10,7 @@ import { RecipeService } from '../recipe.service';
   templateUrl: './recipe-card.component.html',
   styleUrls: ['./recipe-card.component.css']
 })
-export class RecipeCardComponent implements OnInit {
-  public editMode = false;
+export class RecipeCardComponent implements OnDestroy, OnInit {
   public recipe: Recipe | undefined;
 
   public constructor(
@@ -19,16 +18,27 @@ export class RecipeCardComponent implements OnInit {
     private recipeService: RecipeService) { }
 
   public ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.editMode = params.editMode == "true" ? true : false;
-    });
     const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.recipeService.getRecipe(id).subscribe(recipe => this.recipe = recipe);
   }
 
-  public save(): void {
+  public ngOnDestroy(): void {
     if (this.recipe) {
       this.recipeService.updateRecipe(this.recipe).subscribe();
+    }
+  }
+
+  public addIngredient(): void {
+    if (this.recipe) {
+      let name = '';
+      this.recipe.ingredients.push({ name } as Ingredient);
+    }
+  }
+
+  public addInstruction(): void {
+    if (this.recipe) {
+      let method = '';
+      this.recipe.instructions.push({ method } as Instruction);
     }
   }
 }
