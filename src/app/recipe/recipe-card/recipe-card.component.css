@@ -6,8 +6,8 @@ input {
 input:active,
 input:focus,
 input:hover {
-  border-bottom-color: grey;
   background: #EEEEEE;
+  border-bottom-color: grey;
 }
 
 .title {
