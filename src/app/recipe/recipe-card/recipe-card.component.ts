@@ -30,14 +30,14 @@ export class RecipeCardComponent implements OnDestroy, OnInit {
 
   public addIngredient(): void {
     if (this.recipe) {
-      let name = '';
+      const name = '';
       this.recipe.ingredients.push({ name } as Ingredient);
     }
   }
 
   public addInstruction(): void {
     if (this.recipe) {
-      let method = '';
+      const method = '';
       this.recipe.instructions.push({ method } as Instruction);
     }
   }

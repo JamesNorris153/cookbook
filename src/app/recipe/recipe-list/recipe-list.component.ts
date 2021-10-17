@@ -21,15 +21,12 @@ export class RecipeListComponent implements OnInit {
   }
 
   public addRecipe(): void {
-    let name = '';
-    let ingredients: Ingredient[] = [];
-    let instructions: Instruction[] = [];
+    const name = '';
+    const ingredients: Ingredient[] = [];
+    const instructions: Instruction[] = [];
+    const recipe = { name, ingredients, instructions } as Recipe;
 
-    this.recipeService.addRecipe({
-      name,
-      ingredients,
-      instructions
-    } as Recipe).subscribe(recipe => {
+    this.recipeService.addRecipe(recipe).subscribe(recipe => {
       this.recipes.push(recipe);
       this.router.navigate([`/recipes/${recipe.id}`]);
     });
