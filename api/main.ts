@@ -1,5 +1,5 @@
-import { createServer, Server } from 'http';
 import express, { Application } from 'express';
+import { createServer, Server } from 'http';
 
 import { middleware } from './middleware/middleware';
 import { MiddlewareRegistrator } from './middleware/middleware-registrator';
