@@ -4,6 +4,8 @@ import express, { Application } from 'express';
 import { middleware } from './middleware/middleware';
 import { MiddlewareRegistrator } from './middleware/middleware-registrator';
 
+const PORT = 3000;
+
 async function main() {
   try {
     const app = express();
@@ -12,10 +14,10 @@ async function main() {
 
     const server = createServer(app);
 
-    server.listen(3000);
+    server.listen(PORT);
 
     server.on('listening', () => {
-      console.log(`server listening on port 3000`);
+      console.log(`server listening on port ${PORT}`);
     });
 
     server.on('close', () => {
