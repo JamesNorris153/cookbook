@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
 
-import { errorHandler } from './error-handler';
-
+import { handleError } from './error-handler';
 
 export class MiddlewareRegistrator {
   public constructor(private readonly router: Router) { }
