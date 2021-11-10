@@ -43,7 +43,7 @@ export class RecipeService {
     );
   }
 
-  private handleError<T>(operation: string, result?: T) {
+  private handleError<T>(_: string, result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       return of(result as T);
