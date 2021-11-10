@@ -15,10 +15,6 @@ async function main() {
     await databaseClient.connect();
 
     const database = databaseClient.db('cookbook');
-    const test = database.collection('test');
-
-    console.log(`Database name: ${database.databaseName}`);
-    console.log(`Collection name: ${test.collectionName}`);
 
     const app = express();
     new MiddlewareRegistrator(app).register(middleware);
