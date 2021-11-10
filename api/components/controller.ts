@@ -1,5 +1,5 @@
-import { Router } from "express";
 import { Collection } from "mongodb";
+import { Router } from "express";
 
 export abstract class Controller {
   private _router: Router | undefined;
