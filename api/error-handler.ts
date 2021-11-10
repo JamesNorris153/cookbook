@@ -2,9 +2,9 @@ import { NextFunction, Request, Response } from 'express';
 
 export function handleError(
   error: Error,
-  request: Request,
+  _request: Request,
   response: Response,
-  nextFunction: NextFunction): void | Response {
+  _nextFunction: NextFunction): void | Response {
   console.error(error);
 
   return response.status(500).json({
