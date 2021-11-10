@@ -21,17 +21,29 @@ export class TestController {
   private initialiseRoutes(): void {
     this._router = Router();
 
-    this._router.get('/', async (request: Request, response: Response) => {
-      try {
-        console.log('f');
-        const tests = (await this.tests.find({}).toArray()) as Test[];
+    this._router.get('/', (request, response) => this.getTests(request, response));
+    this._router.post('/', (request, response) => this.postTest(request, response));
+  }
 
-        console.log('f');
+  private async getTests(_: Request, response: Response): Promise<void> {
+    try {
+      const tests = (await this.tests.find({}).toArray()) as Test[];
+      response.status(200).json(tests);
+    } catch (error) {
+      response.status(500).json(error.message);
+    }
+  }
 
-        response.status(200).json(tests);
-      } catch (error) {
-        response.status(500).json(error.message);
-      }
-    })
+  private async postTest(request: Request, response: Response): Promise<void> {
+    try {
+      const test = request.body as Test;
+      const result = await this.tests.insertOne(test);
+
+      result
+        ? response.status(200).json(result.acknowledged)
+        : response.status(500).send("bad thing");
+    } catch (error) {
+      response.status(500).send(error.message);
+    }
   }
 }
