@@ -1,5 +1,5 @@
-import express, { Application } from 'express';
-import { createServer, Server } from 'http';
+import express from 'express';
+import { createServer } from 'http';
 import { MongoClient } from 'mongodb';
 
 import { ComponentRegistrator } from './components/component-registrator';
