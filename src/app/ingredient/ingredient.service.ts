@@ -18,10 +18,11 @@ export class IngredientService {
     return this.httpClient.post<Ingredient>(
       this.ingredientsUrl,
       ingredient,
-      this.httpOptions).pipe(
-        tap(_ => console.log('addIngredient')),
-        catchError(this.handleError<Ingredient>('addIngredient'))
-      );
+      this.httpOptions
+    ).pipe(
+      tap(_ => console.log('addIngredient')),
+      catchError(this.handleError<Ingredient>('addIngredient'))
+    );
   }
 
   public deleteIngredient(id: string): Observable<any> {
