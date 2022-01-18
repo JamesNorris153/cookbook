@@ -1,11 +1,14 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
-import { RecipeCardComponent } from './recipe/recipe-card/recipe-card.component'
+import { IngredientListComponent }
+  from './ingredient/ingredient-list/ingredient-list.component';
+import { RecipeComponent } from './recipe/recipe/recipe.component'
 import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component'
 
 const routes: Routes = [
-  { path: 'recipes/:id', component: RecipeCardComponent },
+  { path: 'ingredients', component: IngredientListComponent },
+  { path: 'recipes/:id', component: RecipeComponent },
   { path: 'recipes', component: RecipeListComponent }
 ];
 

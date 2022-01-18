@@ -5,13 +5,19 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RecipeCardComponent } from './recipe/recipe-card/recipe-card.component';
+import { IngredientListComponent } from
+  './ingredient/ingredient-list/ingredient-list.component';
+import { IngredientListItemComponent } from
+  './ingredient/ingredient-list/ingredient-list-item/ingredient-list-item.component';
+import { RecipeComponent } from './recipe/recipe/recipe.component';
 import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RecipeCardComponent,
+    IngredientListComponent,
+    IngredientListItemComponent,
+    RecipeComponent,
     RecipeListComponent
   ],
   imports: [

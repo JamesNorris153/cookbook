@@ -5,7 +5,7 @@ import { json } from 'express';
 
 const middleware = [
   helmet(),
-  cors({ origin:  '*' }),
+  cors({ origin: '*' }),
   json(),
   compression()
 ];

@@ -8,9 +8,6 @@ export class MiddlewareRegistrator {
       (request: Request, response: Response, nextFunction: NextFunction): void
     }[]
   ): void {
-    for (const mw of middleware) {
-      console.log(mw);
-      this.router.use(mw);
-    }
+    for (const mw of middleware) this.router.use(mw);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Recipe, Ingredient, Instruction } from '../recipe';
+import { Recipe } from '../recipe';
 import { RecipeService } from '../recipe.service';
 
 @Component({
@@ -14,21 +14,23 @@ export class RecipeListComponent implements OnInit {
 
   public constructor(
     private recipeService: RecipeService,
-    private router: Router) { }
+    private router: Router) {
+      console.log('recipes');
+    }
 
   public ngOnInit(): void {
     this.recipeService.getRecipes().subscribe(recipes => this.recipes = recipes);
   }
 
   public addRecipe(): void {
-    const name = '';
-    const ingredients: Ingredient[] = [];
-    const instructions: Instruction[] = [];
-    const recipe = { name, ingredients, instructions } as Recipe;
-
-    this.recipeService.addRecipe(recipe).subscribe(recipe => {
+    this.recipeService.addRecipe({
+      _id: undefined,
+      name: 'New Recipe',
+      ingredients: [],
+      instructions: []
+    } as Recipe).subscribe((recipe: Recipe) => {
       this.recipes.push(recipe);
-      this.router.navigate([`/recipes/${recipe.id}`]);
+      this.router.navigate([`/recipes/${recipe._id}`]);
     });
   }
 }

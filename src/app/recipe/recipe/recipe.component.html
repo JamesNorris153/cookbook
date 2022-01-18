@@ -1,10 +1,10 @@
 <div
-  *ngIf="recipe">
+  *ngIf="this.recipe">
   <div>
     <input
       #recipeName
       class="title"
-      [(ngModel)]="recipe.name"
+      [(ngModel)]="this.recipe.name"
       placeholder="Recipe name"/>
   </div>
 
@@ -12,17 +12,22 @@
     <div>
       <h2>Ingredients</h2>
       <li
-        *ngFor="let ingredient of recipe.ingredients">
+        *ngFor="let recipeIngredient of this.recipe.ingredients">
         <br/>
         <div
           class="flex-container">
           <input
-            [(ngModel)]="ingredient.quantity"
+            [(ngModel)]="recipeIngredient.quantity"
             placeholder="Quantity"/>
             <p>of</p>
-          <input
-            [(ngModel)]="ingredient.name"
-            placeholder="Ingredient"/>
+          <select
+            [(ngModel)]="recipeIngredient._id">
+            <option
+              *ngFor="let ingredient of ingredients"
+              [value]="ingredient._id">
+              {{ingredient.name}}
+            </option>
+          </select>
         </div>
       </li>
       <button
@@ -34,7 +39,7 @@
     <div>
       <h2>Method</h2>
       <ol
-        *ngFor="let instruction of recipe.instructions; index as i">
+        *ngFor="let instruction of this.recipe.instructions; index as i">
         <div
           class="flex-container">
           <p>{{i}}</p>
@@ -51,5 +56,16 @@
         +
       </button>
     </div>
+  </div>
+
+  <div>
+    <button
+      (click)="saveRecipe()">
+      Save
+    </button>
+    <button
+      (click)="deleteRecipe()">
+      Delete
+    </button>
   </div>
 </div>

@@ -1,0 +1,13 @@
+<div
+  *ngIf="this.ingredient && this.deleteIngredient">
+  <input
+    [(ngModel)]="this.ingredient.name"/>
+  <button
+    (click)="this.saveIngredient()">
+    save
+  </button>
+  <button
+    (click)="this.deleteIngredient()">
+    delete
+  </button>
+</div>
