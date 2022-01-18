@@ -1,10 +1,7 @@
-import { Collection } from "mongodb";
 import { Router } from "express";
 
-export abstract class Controller {
+export abstract class Routes {
   private _router: Router | undefined;
-
-  public constructor(protected readonly collection: Collection) { }
 
   public get router(): Router {
     if (!this._router) {

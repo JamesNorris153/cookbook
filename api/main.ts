@@ -1,24 +1,27 @@
 import express from 'express';
 import { createServer } from 'http';
-import { MongoClient } from 'mongodb';
+import { connect } from 'mongoose';
 
-import { ComponentRegistrator } from './components/component-registrator';
 import { handleError } from './error-handler';
 import { middleware } from './middleware/middleware';
+import { RoutesRegistrator } from './components/routes-registrator';
 import { MiddlewareRegistrator } from './middleware/middleware-registrator';
 
 const PORT = 3000;
+const DATABASE_URL = 'mongodb://localhost:27017/';
+const DATABASE_NAME = 'cookbook';
 
 async function main() {
   try {
-    const databaseClient = new MongoClient('mongodb://localhost:27017');
-    await databaseClient.connect();
-
-    const database = databaseClient.db('cookbook');
+    const options = { dbName: DATABASE_NAME };
+    await connect(DATABASE_URL, options).then(
+      () => console.log(`connected to database: ${DATABASE_URL}${DATABASE_NAME}`),
+      _error => console.error(`database connection fail: ${DATABASE_URL}${DATABASE_NAME}`)
+    );
 
     const app = express();
     new MiddlewareRegistrator(app).register(middleware);
-    new ComponentRegistrator(database, app).register('/api');
+    new RoutesRegistrator(app).register('/api');
     app.use(handleError);
 
     const server = createServer(app);

@@ -1,0 +1,19 @@
+<div>
+  <h2>Ingredients</h2>
+  <div>
+    <input
+      type="text"
+      #ingredientName/>
+    <button
+      (click)="this.addIngredient(ingredientName.value); ingredientName.value=''">
+      add
+    </button>
+  </div>
+  <p
+    *ngFor="let ingredient of this.ingredients">
+    <ingredient-list-item
+      [ingredient]="ingredient"
+      (onDeleteIngredient)="this.deleteIngredient($event)">
+    </ingredient-list-item>
+  </p>
+</div>
