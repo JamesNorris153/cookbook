@@ -1,27 +1,32 @@
 <div
-  *ngIf="this.recipe">
-  <div>
+  *ngIf="this.recipeForm">
+  <form
+    [formGroup]="this.recipeForm"
+    (ngSubmit)="this.saveRecipe()">
     <input
-      #recipeName
       class="title"
-      [(ngModel)]="this.recipe.name"
+      formControlName="name"
+      type="text"
       placeholder="Recipe name"/>
-  </div>
-
-  <div>
-    <div>
-      <h2>Ingredients</h2>
-      <li
-        *ngFor="let recipeIngredient of this.recipe.ingredients">
-        <br/>
+    <div
+      formArrayName="ingredients">
+      <h2>
+        Ingredients
+      </h2>
+      <div
+        *ngFor="let recipeIngredient of this.recipeIngredients.controls; let i=index">
         <div
-          class="flex-container">
+          class="flex-container"
+          [formGroupName]="i">
           <input
-            [(ngModel)]="recipeIngredient.quantity"
+            formControlName="quantity"
+            type="text"
             placeholder="Quantity"/>
-            <p>of</p>
+          <p>
+            of
+          </p>
           <select
-            [(ngModel)]="recipeIngredient._id">
+            formControlName="_id">
             <option
               *ngFor="let ingredient of ingredients"
               [value]="ingredient._id">
@@ -29,43 +34,52 @@
             </option>
           </select>
         </div>
-      </li>
+      </div>
       <button
+        type="button"
         (click)="addIngredient()">
+        +
+      </button>
+    </div>
+    <div
+      formArrayName="instructions">
+      <h2>
+        Instructions
+      </h2>
+      <div
+        *ngFor="let instruction of this.instructions.controls; let i = index">
+        <div
+          class="flex-container"
+          [formGroupName]="i">
+          <p>
+            {{i}}
+          </p>
+          <input
+            formControlName="duration"
+            type="text"/>
+          <input
+            formControlName="method"
+            type="text"
+            placeholder="Method"/>
+        </div>
+      </div>
+      <button
+        type="button"
+        (click)="addInstruction()">
         +
       </button>
     </div>
 
     <div>
-      <h2>Method</h2>
-      <ol
-        *ngFor="let instruction of this.recipe.instructions; index as i">
-        <div
-          class="flex-container">
-          <p>{{i}}</p>
-          <input
-            [(ngModel)]="instruction.duration"
-            placeholder="Duration"/>
-          <input
-            [(ngModel)]="instruction.method"
-            placeholder="Method"/>
-        </div>
-      </ol>
       <button
-        (click)="addInstruction()">
-        +
+        type="submit"
+        [disabled]="!this.recipeForm.valid">
+        Save
+      </button>
+      <button
+        (click)="deleteRecipe()">
+        Delete
       </button>
     </div>
-  </div>
-
-  <div>
-    <button
-      (click)="saveRecipe()">
-      Save
-    </button>
-    <button
-      (click)="deleteRecipe()">
-      Delete
-    </button>
-  </div>
+  </form>
 </div>
